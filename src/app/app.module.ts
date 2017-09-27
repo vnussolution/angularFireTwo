@@ -13,7 +13,41 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MdButtonModule, Md, MdCheckboxModule } from '@angular/material';
+import {
+  MdAutocompleteModule,
+  MdButtonModule,
+  MdButtonToggleModule,
+  MdCardModule,
+  MdCheckboxModule,
+  MdChipsModule,
+  MdDatepickerModule,
+  MdDialogModule,
+  MdExpansionModule,
+  MdGridListModule,
+  MdIconModule,
+  MdInputModule,
+  MdListModule,
+  MdMenuModule,
+  MdNativeDateModule,
+  MdPaginatorModule,
+  MdProgressBarModule,
+  MdProgressSpinnerModule,
+  MdRadioModule,
+  MdRippleModule,
+  MdSelectModule,
+  MdSidenavModule,
+  MdSliderModule,
+  MdSlideToggleModule,
+  MdSnackBarModule,
+  MdSortModule,
+  MdTableModule,
+  MdTabsModule,
+  MdToolbarModule,
+  MdTooltipModule,
+  MdStepperModule
+} from '@angular/material';
+import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+import { CompanyService } from './company/company.service';
 
 
 // Initialize Firebase
@@ -28,8 +62,37 @@ const firebaseConfig = {
 
 ////////////////setup material  ////////////////////////////
 @NgModule({
-  imports: [MdButtonModule, MdCheckboxModule],
-  exports: [MdButtonModule, MdCheckboxModule],
+  exports: [MdAutocompleteModule,
+    MdButtonModule,
+    MdButtonToggleModule,
+    MdCardModule,
+    MdCheckboxModule,
+    MdChipsModule,
+    MdDatepickerModule,
+    MdDialogModule,
+    MdExpansionModule,
+    MdGridListModule,
+    MdIconModule,
+    MdInputModule,
+    MdListModule,
+    MdMenuModule,
+    MdNativeDateModule,
+    MdPaginatorModule,
+    MdProgressBarModule,
+    MdProgressSpinnerModule,
+    MdRadioModule,
+    MdRippleModule,
+    MdSelectModule,
+    MdSidenavModule,
+    MdSliderModule,
+    MdSlideToggleModule,
+    MdSnackBarModule,
+    MdSortModule,
+    MdTableModule,
+    MdTabsModule,
+    MdToolbarModule,
+    MdTooltipModule,
+    MdStepperModule]
 })
 export class MyOwnCustomMaterialModule { }
 
@@ -37,7 +100,8 @@ export class MyOwnCustomMaterialModule { }
 /////////////////////
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CompanyEditComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +115,7 @@ export class MyOwnCustomMaterialModule { }
     MyOwnCustomMaterialModule
 
   ],
-  providers: [],
+  providers: [CompanyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

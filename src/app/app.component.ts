@@ -16,3 +16,4 @@ export class AppComponent {
     this.af.object(`testing`).subscribe(value => console.log('value:: ', value));
   }
 }
+
