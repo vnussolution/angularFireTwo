@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import 'hammerjs';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,41 +14,12 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import {
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdButtonToggleModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdChipsModule,
-  MdDatepickerModule,
-  MdDialogModule,
-  MdExpansionModule,
-  MdGridListModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdMenuModule,
-  MdNativeDateModule,
-  MdPaginatorModule,
-  MdProgressBarModule,
-  MdProgressSpinnerModule,
-  MdRadioModule,
-  MdRippleModule,
-  MdSelectModule,
-  MdSidenavModule,
-  MdSliderModule,
-  MdSlideToggleModule,
-  MdSnackBarModule,
-  MdSortModule,
-  MdTableModule,
-  MdTabsModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  MdStepperModule
-} from '@angular/material';
+
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { CompanyService } from './company/company.service';
+import { CompanyListComponent } from './company/company-list/company-list.component';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from './shared/Material.module';
 
 
 // Initialize Firebase
@@ -60,48 +32,12 @@ const firebaseConfig = {
   messagingSenderId: "700073074468"
 };
 
-////////////////setup material  ////////////////////////////
-@NgModule({
-  exports: [MdAutocompleteModule,
-    MdButtonModule,
-    MdButtonToggleModule,
-    MdCardModule,
-    MdCheckboxModule,
-    MdChipsModule,
-    MdDatepickerModule,
-    MdDialogModule,
-    MdExpansionModule,
-    MdGridListModule,
-    MdIconModule,
-    MdInputModule,
-    MdListModule,
-    MdMenuModule,
-    MdNativeDateModule,
-    MdPaginatorModule,
-    MdProgressBarModule,
-    MdProgressSpinnerModule,
-    MdRadioModule,
-    MdRippleModule,
-    MdSelectModule,
-    MdSidenavModule,
-    MdSliderModule,
-    MdSlideToggleModule,
-    MdSnackBarModule,
-    MdSortModule,
-    MdTableModule,
-    MdTabsModule,
-    MdToolbarModule,
-    MdTooltipModule,
-    MdStepperModule]
-})
-export class MyOwnCustomMaterialModule { }
 
-
-/////////////////////
 @NgModule({
   declarations: [
     AppComponent,
-    CompanyEditComponent
+    CompanyEditComponent,
+    CompanyListComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +48,9 @@ export class MyOwnCustomMaterialModule { }
     AngularFireAuthModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MyOwnCustomMaterialModule
+    MaterialModule,
+    AppRoutingModule,
+    RouterModule
 
   ],
   providers: [CompanyService],
