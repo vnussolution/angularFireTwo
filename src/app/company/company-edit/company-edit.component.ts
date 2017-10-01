@@ -17,7 +17,7 @@ export class CompanyEditComponent implements OnInit {
   isNewCompany: boolean;
   compKey: string;
 
-  comp$: FirebaseObjectObservable<any>;
+  comp$: FirebaseObjectObservable<ICompany>;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private services: CompanyService) {
 
@@ -26,6 +26,7 @@ export class CompanyEditComponent implements OnInit {
     if (!this.isNewCompany)
       this.getCompany();
     else
+      // initialize an empty observable object
       this.comp$ = Observable.of({}) as FirebaseObjectObservable<ICompany>;
   }
 
@@ -33,20 +34,21 @@ export class CompanyEditComponent implements OnInit {
   }
 
   getCompany() {
-    this.comp$ = this.services.getComp(this.compKey);
+    this.comp$ = <FirebaseObjectObservable<ICompany>>this.services.getComp(this.compKey);
   }
 
   saveCompany(company) {
-    this.isNewCompany ? this.services.saveCompList(company) : this.services.updateCompList(company);
-    // this.services.saveCompObj(company);
+    const save = this.isNewCompany ? this.services.saveCompList(company) : this.services.updateCompList(company);
+    save.then(_ => this.router.navigate(['company-list']));
   }
 
   updateCompany(company) {
     this.services.updateCompObj(company);
   }
 
-  removeCompany() {
-    this.services.removeCompObj();
+  removeCompanyList(company) {
+    this.services.removeCompList(company)
+      .then(_ => this.router.navigate(['company-list']));
   }
 
 }

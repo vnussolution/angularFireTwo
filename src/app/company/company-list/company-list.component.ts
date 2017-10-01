@@ -13,7 +13,7 @@ import { ICompany } from '../../interfaces';
 export class CompanyListComponent implements OnInit {
 
 
-  companyList$: FirebaseListObservable<ICompany[]>
+  companyList$: FirebaseListObservable<ICompany[]>;
   constructor(private services: CompanyService) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class CompanyListComponent implements OnInit {
   }
 
   getCompanies() {
-    this.companyList$ = this.services.getComps();
+    this.companyList$ = <FirebaseListObservable<ICompany[]>>this.services.getComps();
     console.log(' list: ', this.companyList$);
 
   }

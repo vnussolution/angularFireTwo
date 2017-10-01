@@ -1,6 +1,6 @@
 Company: {{ comp$ | async |json}}
 
-
+<!-- use observable in *ngIf -->
 <md-card *ngIf='comp$ | async as company'>
   <md-input-container>
     <input type="text" mdInput [(ngModel)]='company.name'>
@@ -10,7 +10,7 @@ Company: {{ comp$ | async |json}}
   </md-input-container>
   <md-card-actions align='right'>
     <button md-button (click)='saveCompany(company)'>Save it</button>
-    <button md-button (click)='removeCompany()'>Remove it</button>
+    <button md-button (click)='removeCompanyList(company)'>Remove it</button>
   </md-card-actions>
 
 </md-card>

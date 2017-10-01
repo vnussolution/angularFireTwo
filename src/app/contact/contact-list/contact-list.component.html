@@ -1,0 +1,25 @@
+<div fxLayoutAlign='space-between center'>
+  <h1> Contacts</h1>
+  <div>
+
+    <md-select placeholder='Company' (change)='contactService.subject$.next($event.value)'>
+      <md-option [value]='undefined'> All </md-option>
+      <md-option *ngFor='let company of companies$ | async' [value]='company.$key'>{{company.name}}</md-option>
+    </md-select>
+    <form class="example-form">
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="Favorite food" #inputContact type=text [value]="searchContact">
+      </md-form-field>
+      <p> result: {{searchContact}}</p>
+    </form>
+
+  </div>
+</div>
+<md-card *ngFor="let contact of contactList$ | async" fxLayoutAlign='space-between center'>
+  <span>{{contact.name}}</span>
+  <button md-button [routerLink]="['/contact-edit',contact.$key]"> Edit</button>
+</md-card>
+
+<button md-fab [routerLink]="['/contact-edit/new']">
+  <md-icon>add</md-icon> 
+</button>

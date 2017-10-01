@@ -1,3 +1,6 @@
+import { ContactListComponent } from './contact/contact-list/contact-list.component';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+import { ContactService } from './contact/contact.service';
 import { firebaseConfig } from './secret';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import 'hammerjs';
@@ -28,7 +31,9 @@ import { MaterialModule } from './shared/Material.module';
   declarations: [
     AppComponent,
     CompanyEditComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    ContactEditComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,7 @@ import { MaterialModule } from './shared/Material.module';
     RouterModule
 
   ],
-  providers: [CompanyService],
+  providers: [CompanyService, ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

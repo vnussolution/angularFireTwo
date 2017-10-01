@@ -1,0 +1,25 @@
+Contact: {{ contact$ | async |json}}
+
+<!-- use observable in *ngIf -->
+<md-card>
+  <md-input-container>
+    <input type="text" mdInput [(ngModel)]='contact.name'>
+  </md-input-container>
+  <md-input-container>
+    <input type="text" mdInput [(ngModel)]='contact.phone'>
+  </md-input-container>
+  <div *ngIf="!isNewContact">
+    <md-select placeholder='Company' [(ngModel)]='selectedCompany'>
+      <md-option *ngFor='let company of companies$ | async' [value]='company'>{{company.name}}</md-option>
+    </md-select>
+    <button md-raised-button (click)='addCompany()'>add company</button>
+  </div>
+  <md-list>
+    <md-list-item *ngFor="let company of contactCompanies">{{company.name}}</md-list-item>
+  </md-list>
+  <md-card-actions align='right'>
+    <button md-button (click)='saveContact(contact)'>Save it</button>
+    <button md-button (click)='removeContactList(contact)'>Remove it</button>
+  </md-card-actions>
+
+</md-card>
