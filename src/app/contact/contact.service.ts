@@ -5,7 +5,10 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable }
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
@@ -29,14 +32,19 @@ export class ContactService {
 
   // if companyKey is undefined, it will return all
   getContacts() {
-    return this.db.list('contacts', {
-      query: {
-        orderByChild: 'name',
-        equalTo: this.subject$
-      }
-    });
+    return this.subject$
+      .switchMap(companyKey => (companyKey === undefined) ?
+        this.contacts$ : this.companyContactsJoin(companyKey))
+      .catch(this.errorHandler);
   }
 
+  companyContactsJoin(companyKey) {
+    return this.db.list(`companyContacts/${companyKey}`)
+      .map(contactKeys => contactKeys.map(contact => this.db.object(`contacts/${contact.$key}`)))
+      .switchMap(contactObsArray => (contactObsArray.length >= 1) ?
+        Observable.combineLatest(contactObsArray) : Observable.of([]))
+      .catch(this.errorHandler);
+  }
 
   saveContactList(contact: IContact) {
     return this.contacts$.push(contact)

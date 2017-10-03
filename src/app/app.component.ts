@@ -1,3 +1,4 @@
+import { AuthService } from './auth/auth.service';
 import { Component } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -12,7 +13,7 @@ export class AppComponent {
   title = 'app';
 
 
-  constructor(private af: AngularFireDatabase) {
+  constructor(private af: AngularFireDatabase, public authService: AuthService) {
     this.af.object(`testing`).subscribe(value => console.log('value:: ', value));
   }
 }

@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
 import { ContactService } from './contact/contact.service';
@@ -24,6 +26,7 @@ import { CompanyService } from './company/company.service';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './shared/Material.module';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -33,7 +36,8 @@ import { MaterialModule } from './shared/Material.module';
     CompanyEditComponent,
     CompanyListComponent,
     ContactEditComponent,
-    ContactListComponent
+    ContactListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,7 @@ import { MaterialModule } from './shared/Material.module';
     RouterModule
 
   ],
-  providers: [CompanyService, ContactService],
+  providers: [AuthGuard, CompanyService, ContactService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
