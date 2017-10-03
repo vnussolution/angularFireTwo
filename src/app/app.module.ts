@@ -6,6 +6,7 @@ import { ContactService } from './contact/contact.service';
 import { firebaseConfig } from './secret';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import 'hammerjs';
+import 'firebase/storage'; // global firebase storage js
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

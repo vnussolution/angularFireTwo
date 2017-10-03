@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import 'rxjs/add/observable/of';
 
+import * as firebase from 'firebase/app'; // typings only
+
 
 @Component({
   selector: 'app-contact-edit',
@@ -31,6 +33,7 @@ export class ContactEditComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
     this.companies$ = this.companyService.getComps();
     this.contactKey = this.activatedRoute.snapshot.params['id'];
@@ -39,11 +42,19 @@ export class ContactEditComponent implements OnInit {
       this.getContact();
   }
 
+
+
   getContact() {
     this.contactService.getContact(this.contactKey).subscribe(contact => {
       this.contact = contact;
       this.setContactCompanies();
     });
+  }
+
+  uploadFile(event: any) {
+    const file = event.srcElement.files[0];
+    const storageRef = firebase.storage().ref(`contacts/${this.contactKey}`);
+    storageRef.put(file).then(uploadTask => this.contact.imageUrl = uploadTask.downloadURL);
   }
 
   addCompany() {

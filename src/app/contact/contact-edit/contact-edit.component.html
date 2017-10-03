@@ -2,6 +2,11 @@ Contact: {{ contact$ | async |json}}
 
 <!-- use observable in *ngIf -->
 <md-card>
+
+  <div>
+    <img [src]="contact.imageUrl" alt="contact image profile" *ngIf='contact.imageUrl'>
+    <input type="file" *ngIf="!isNewContact" (change)='uploadFile($event)'>
+  </div>
   <md-input-container>
     <input type="text" mdInput [(ngModel)]='contact.name'>
   </md-input-container>
